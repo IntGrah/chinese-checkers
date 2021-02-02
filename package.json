@@ -1,0 +1,22 @@
+{
+  "name": "chinese-checkers",
+  "version": "1.0.0",
+  "description": "Chinese Checkers AI",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IntGrah/chinese-checkers.git"
+  },
+  "keywords": [
+    "ai"
+  ],
+  "author": "Jeremy Chen",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/IntGrah/chinese-checkers/issues"
+  },
+  "homepage": "https://github.com/IntGrah/chinese-checkers#readme"
+}
