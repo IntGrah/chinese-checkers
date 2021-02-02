@@ -1,0 +1,87 @@
+div#controls {
+    font-size: 0;
+}
+
+div#controls div,
+div#controls select#depth {
+    display: inline-block;
+    box-sizing: content-box;
+    border-width: 0px;
+    outline: none;
+    padding: 14px 0;
+    width: 40px;
+    height: 12px;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: #dddddd;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+div#controls div.selected,
+div#controls select#depth.selected,
+div#controls div:hover,
+div#controls select#depth:hover {
+    background-color: #444444;
+    color: #ffffff;
+}
+
+div#controls select#depth option {
+    height: 100px;
+}
+
+div#controls div#turn {
+    background-color: #ff0000;
+    color: #000000;
+}
+
+div#boardBox {
+    width: 50%;
+    height: 672px;
+    float: left;
+}
+
+div#boardBox table#board {
+    position: absolute;
+    border-spacing: 0;
+    top: 200px;
+    transform: rotate(-135deg) skew(15deg, 15deg);
+}
+
+div#boardBox table#board tr td {
+    border-radius: 40px;
+    transform: skew(-15deg, -15deg);
+    border: 2px solid black;
+    width: 36px;
+    height: 36px;
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+div#boardBox table#board tr td:hover {
+    border: 2px solid #00ff00;
+}
+
+div#textBox {
+    width: 50%;
+    height: 50%;
+    float: right;
+}
+
+div#textBox pre {
+    width: 100%;
+    height: 50%;
+    overflow-y: auto;
+    transition: color 0.5s;
+}
+
+div#textBox pre.invisible {
+    color: #ffffff;
+    user-select: none;
+}
+
+body {
+    font-family: sans-serif;
+}
