@@ -1,20 +1,18 @@
 class Game {
-    meta: Meta;
     node: GameNode;
     log: Move[];
     lastMove: Move;
 
-    constructor(meta: Meta) {
+    constructor(private meta: Meta) {
         const now: Date = new Date();
-        meta.event ??= "??";
-        meta.site ??= "checkers.js";
-        meta.date ??= now.toLocaleDateString();
-        meta.time ??= now.toLocaleTimeString();
-        meta.plyCount ??= 0;
-        meta.x ??= "Unknown";
-        meta.o ??= "checkers.js";
-        meta.result ??= "*";
-        this.meta = meta;
+        this.meta.event ??= "??";
+        this.meta.site ??= "checkers.js";
+        this.meta.date ??= now.toLocaleDateString();
+        this.meta.time ??= now.toLocaleTimeString();
+        this.meta.plyCount ??= 0;
+        this.meta.x ??= "Unknown";
+        this.meta.o ??= "checkers.js";
+        this.meta.result ??= "*";
         this.importFEN(meta.fen);
 
     }
@@ -38,7 +36,7 @@ class Game {
         this.renderFEN();
     }
     playSAN(san: string): void {
-        const move: Move = [[U.letters.indexOf(san[0]), Number(san[1]) - 1], [U.letters.indexOf(san[2]), Number(san[3]) - 1]];
+        const move: Move = [[Letter[san[0]], Number(san[1]) - 1], [Letter[san[2]], Number(san[3]) - 1]];
         this.play(move);
     }
     playBestMove(depth: number): void {

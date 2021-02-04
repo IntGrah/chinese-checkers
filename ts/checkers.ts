@@ -1,22 +1,17 @@
 class GameNode {
-    board: Board;
-    turn: boolean;
-    evaluations: number[];
-    moves: Move[];
-    ends: Point[];
+    private evaluations: number[];
+    private moves: Move[];
+    private ends: Point[];
 
-    constructor(board: Board, turn: boolean) {
-        this.board = board;
-        this.turn = turn;
-    }
+    constructor(public board: Board, public turn: boolean) {}
     
-    bestMove(depth: number): Move {
+    public bestMove(depth: number): Move {
         const evaluation: number = this.evaluate(depth, -1000, 1000, true),
             n: number = this.evaluations.indexOf(evaluation);
         console.log(evaluation);
         return this.moves[n];
     }
-    evaluate(depth: number, alpha: number, beta: number, root: boolean): number {
+    private evaluate(depth: number, alpha: number, beta: number, root: boolean): number {
         if (root) {
             transpositionTable = {};
         }
@@ -76,7 +71,7 @@ class GameNode {
         }
         return transpositionTable[serial] = value;
     }
-    serialize(depth: number): string {
+    private serialize(depth: number): string {
         let string: string = "" + depth + this.turn;
         for (let i: number = 0; i < 9; i++) {
             for (let j: number = 0; j < 9; j++) {
@@ -85,7 +80,7 @@ class GameNode {
         }
         return string;
     }
-    heuristicEvaluate(): number {
+    private heuristicEvaluate(): number {
         let value: number = -176,
             lastX: number = 13,
             lastO: number = 3;
@@ -110,7 +105,7 @@ class GameNode {
         }
         return value + lastX + lastO;
     }
-    lastX(): number {
+    public lastX(): number {
         let last: number = 13;
         for (let i: number = 0; i < 9; i++) {
             for (let j: number = 0; j < 9; j++) {
@@ -121,7 +116,7 @@ class GameNode {
         }
         return last;
     }
-    lastO(): number {
+    public lastO(): number {
         let last: number = 3;
         for (let i: number = 0; i < 9; i++) {
             for (let j: number = 0; j < 9; j++) {
@@ -132,7 +127,7 @@ class GameNode {
         }
         return last;
     }
-    findAllMoves(): Move[] {
+    private findAllMoves(): Move[] {
         const allMoves: Move[] = [],
             positions: Point[] = [];
         for (let i: number = 0; i < 9; i++) {
@@ -166,20 +161,20 @@ class GameNode {
             return 0;
         });
     }
-    findPieceEnds(start: Point): Point[] {
+    public findPieceEnds(start: Point): Point[] {
         this.ends = [];
         this.findMinorMoves(start);
         this.findMajorMoves(start, 6);
         return this.ends;
     }
-    findMinorMoves(start: Point): void {
+    private findMinorMoves(start: Point): void {
         for (const vector of C.SINGLE_VECTORS) {
             if (this.itemAt(start, vector) === 0) {
-                this.ends.push(U.end(start, vector));
+                this.ends.push(U.add(start, vector));
             }
         }
     }
-    findMajorMoves(start: Point, from: number): void {
+    private findMajorMoves(start: Point, from: number): void {
         for (let i: number = 0; i < 6; i++) {
             if (from === i) {
                 continue;
@@ -187,7 +182,7 @@ class GameNode {
             const double: Point = C.DOUBLE_VECTORS[i],
                 jump = this.itemAt(start, C.SINGLE_VECTORS[i]);
             if (this.itemAt(start, double) === 0 && (jump === 1 || jump === 2)) {
-                const test: Point = U.end(start, double);
+                const test: Point = U.add(start, double);
                 if (this.ends.every(end => end[0] !== test[0] || end[1] !== test[1])) {
                     this.ends.push(test);
                     this.findMajorMoves(test, 6 - i);
@@ -195,14 +190,10 @@ class GameNode {
             }
         }
     }
-    itemAt(start: Point, vector: Point): Piece {
-        const y: number = start[1] + vector[1];
-        if (y < 0 || y > 8) {
-            return undefined;
-        }
-        return this.board[y][start[0] + vector[0]];
+    private itemAt(start: Point, vector: Point): Piece {
+        return this.board[start[1] + vector[1]]?.[start[0] + vector[0]];
     }
-    move(move: Move): GameNode {
+    public move(move: Move): GameNode {
         const board: Board = [];
         for (let i: number = 0; i < 9; i++) {
             board[i] = [...this.board[i]];
