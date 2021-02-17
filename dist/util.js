@@ -1,6 +1,5 @@
 const U = {
-    letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
-    end(start, vector) {
+    add(start, vector) {
         return [start[0] + vector[0], start[1] + vector[1]];
     },
     magnitude(start, end) {
@@ -8,7 +7,7 @@ const U = {
     },
     san(move) {
         if (move) {
-            return U.letters[move[0][0]] + (move[0][1] + 1) + U.letters[move[1][0]] + (move[1][1] + 1);
+            return Letter[move[0][0]] + (move[0][1] + 1) + Letter[move[1][0]] + (move[1][1] + 1);
         }
         else {
             return "null";
@@ -34,8 +33,18 @@ const U = {
 const C = {
     SINGLE_VECTORS: [[0, 1], [1, 0], [1, -1], [-1, 1], [-1, 0], [0, -1]],
     DOUBLE_VECTORS: [[0, 2], [2, 0], [2, -2], [-2, 2], [-2, 0], [0, -2]],
-    STARTING_POSITION: "xxxx5/xxx6/xx7/x8/9/8o/7oo/6ooo/5oooo x",
-    ENDGAME_POSITION: "oo7/oo7/ooo6/3o5/3ox4/7x1/4o1xx1/5xxxx/7xx x",
-    ENDING_POSITION: "oooo5/oo6o/oo7/o8/9/8x/7xx/x6xx/5xxxx x"
+    STARTING_POSITION: "xxxx5/xxx6/xx7/x8/9/8o/7oo/6ooo/5oooo x"
 };
-var transpositionTable = {};
+let transpositionTable = {};
+var Letter;
+(function (Letter) {
+    Letter[Letter["a"] = 0] = "a";
+    Letter[Letter["b"] = 1] = "b";
+    Letter[Letter["c"] = 2] = "c";
+    Letter[Letter["d"] = 3] = "d";
+    Letter[Letter["e"] = 4] = "e";
+    Letter[Letter["f"] = 5] = "f";
+    Letter[Letter["g"] = 6] = "g";
+    Letter[Letter["h"] = 7] = "h";
+    Letter[Letter["i"] = 8] = "i";
+})(Letter || (Letter = {}));

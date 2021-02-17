@@ -160,7 +160,7 @@ class GameNode {
     findMinorMoves(start) {
         for (const vector of C.SINGLE_VECTORS) {
             if (this.itemAt(start, vector) === 0) {
-                this.ends.push(U.end(start, vector));
+                this.ends.push(U.add(start, vector));
             }
         }
     }
@@ -171,7 +171,7 @@ class GameNode {
             }
             const double = C.DOUBLE_VECTORS[i], jump = this.itemAt(start, C.SINGLE_VECTORS[i]);
             if (this.itemAt(start, double) === 0 && (jump === 1 || jump === 2)) {
-                const test = U.end(start, double);
+                const test = U.add(start, double);
                 if (this.ends.every(end => end[0] !== test[0] || end[1] !== test[1])) {
                     this.ends.push(test);
                     this.findMajorMoves(test, 6 - i);
@@ -180,11 +180,7 @@ class GameNode {
         }
     }
     itemAt(start, vector) {
-        const y = start[1] + vector[1];
-        if (y < 0 || y > 8) {
-            return undefined;
-        }
-        return this.board[y][start[0] + vector[0]];
+        return this.board[start[1] + vector[1]]?.[start[0] + vector[0]];
     }
     move(move) {
         const board = [];

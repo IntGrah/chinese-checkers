@@ -1,8 +1,8 @@
 function main() {
     g = new Game({});
 }
-var g;
-var start = [], auto = true, flip = false;
+let g;
+let start = [], auto = true, flip = false;
 document.querySelectorAll("td").forEach(function (element) {
     element.addEventListener("mousedown", function (event) {
         event.preventDefault();

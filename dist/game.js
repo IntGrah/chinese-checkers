@@ -1,15 +1,16 @@
 class Game {
     constructor(meta) {
-        const now = new Date();
-        meta.event ?? (meta.event = "??");
-        meta.site ?? (meta.site = "checkers.js");
-        meta.date ?? (meta.date = now.toLocaleDateString());
-        meta.time ?? (meta.time = now.toLocaleTimeString());
-        meta.plyCount ?? (meta.plyCount = 0);
-        meta.x ?? (meta.x = "Unknown");
-        meta.o ?? (meta.o = "checkers.js");
-        meta.result ?? (meta.result = "*");
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         this.meta = meta;
+        const now = new Date();
+        (_a = this.meta).event ?? (_a.event = "??");
+        (_b = this.meta).site ?? (_b.site = "checkers.js");
+        (_c = this.meta).date ?? (_c.date = now.toLocaleDateString());
+        (_d = this.meta).time ?? (_d.time = now.toLocaleTimeString());
+        (_e = this.meta).plyCount ?? (_e.plyCount = 0);
+        (_f = this.meta).x ?? (_f.x = "Unknown");
+        (_g = this.meta).o ?? (_g.o = "checkers.js");
+        (_h = this.meta).result ?? (_h.result = "*");
         this.importFEN(meta.fen);
     }
     play(move) {
@@ -34,7 +35,7 @@ class Game {
         this.renderFEN();
     }
     playSAN(san) {
-        const move = [[U.letters.indexOf(san[0]), Number(san[1]) - 1], [U.letters.indexOf(san[2]), Number(san[3]) - 1]];
+        const move = [[Letter[san[0]], Number(san[1]) - 1], [Letter[san[2]], Number(san[3]) - 1]];
         this.play(move);
     }
     playBestMove(depth) {
@@ -49,7 +50,7 @@ class Game {
         console.log("Computer played: " + U.san(bestMove));
     }
     importFEN(fen = C.STARTING_POSITION) {
-        const board = [], result = fen.match(/(.*) (x|o)/), split = result[1].split("/"), turn = result[2] === "x";
+        const board = [], result = fen.match(/(.*) [xo]/), split = result[1].split("/"), turn = result[2] === "x";
         let y = 0;
         for (const row of split) {
             board.push([]);
