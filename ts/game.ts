@@ -51,9 +51,10 @@ class Game {
     }
     importFEN(fen: string = C.STARTING_POSITION): void {
         const board: Board = [],
-            result: RegExpMatchArray = fen.match(/(.*) [xo]/),
+            result: RegExpMatchArray = fen.match(/(.*) (x|o)/),
             split: string[] = result[1].split("/"),
             turn: boolean = result[2] === "x";
+        console.log(result);
         let y: number = 0;
         for (const row of split) {
             board.push([]);

@@ -1,5 +1,9 @@
 function main(): void {
-    g = new Game({});
+    let fen: string;
+    if (window.location.search) {
+        fen = window.location.search.substring(1).replace(/%20/g, " ");
+    }
+    g = new Game({fen});
 }
 
 let g: Game;
