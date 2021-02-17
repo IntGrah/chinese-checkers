@@ -49,7 +49,6 @@ interface Meta {
     site?: string;
     date?: string;
     time?:string;
-    plyCount?: number;
     x?: string;
     o?: string;
     result?: Result;

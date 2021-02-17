@@ -88,14 +88,12 @@ class GameNode {
             for (let j: number = 0; j < 9; j++) {
                 const piece: Piece = this.board[i][j];
                 if (piece !== 0) {
-                    value += (piece - 1.5) * Math.abs(i - j);
+                    value += i + j + (piece - 1.5) * Math.abs(i - j);
                     if (piece === 1) {
-                        value += i + j;
                         if (i + j < lastX) {
                             lastX = i + j;
                         }
                     } else {
-                        value += i + j;
                         if (i + j > lastO) {
                             lastO = i + j;
                         }

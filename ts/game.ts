@@ -9,7 +9,6 @@ class Game {
         this.meta.site ??= "checkers.js";
         this.meta.date ??= now.toLocaleDateString();
         this.meta.time ??= now.toLocaleTimeString();
-        this.meta.plyCount ??= 0;
         this.meta.x ??= "Unknown";
         this.meta.o ??= "checkers.js";
         this.meta.result ??= "*";
@@ -20,7 +19,6 @@ class Game {
         this.node = this.node.move(move);
         this.renderBoard(move);
         this.log.push(move);
-        this.meta.plyCount++;
         const x: boolean = this.node.lastX() === 13,
             o: boolean = this.node.lastO() === 3;
         if (x && !o) {
@@ -76,7 +74,6 @@ class Game {
         this.node = new GameNode(board, turn);
         this.log = [];
         this.meta.fen = fen;
-        this.meta.plyCount = 0;
         this.renderBoard(null);
         this.renderPGN();
         this.renderFEN();
@@ -96,7 +93,7 @@ class Game {
     }
     exportPGN(): string {
         let pgn: string = `[Event "${this.meta.event}"]\n[Site "${this.meta.site}"]
-[Date "${this.meta.date}"]\n[Time "${this.meta.time}"]\n[PlyCount "${this.meta.plyCount}"]\n`;
+[Date "${this.meta.date}"]\n[Time "${this.meta.time}"]\n[PlyCount "${this.log.length}"]\n`;
         if (this.meta.fen !== C.STARTING_POSITION) {
             pgn += `[FEN "${this.meta.fen}"]\n`
         }
