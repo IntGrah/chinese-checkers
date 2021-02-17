@@ -2,9 +2,9 @@ function main(): void {
     g = new Game({});
 }
 
-var g: Game;
+let g: Game;
 
-var start: Point = [],
+let start: Point = [],
     auto: boolean = true,
     flip: boolean = false;
 

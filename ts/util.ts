@@ -36,7 +36,7 @@ const C = {
     STARTING_POSITION: "xxxx5/xxx6/xx7/x8/9/8o/7oo/6ooo/5oooo x"
 };
 
-var transpositionTable = {};
+let transpositionTable = {};
 
 type Piece = 0 | 1 | 2;
 type Board = Piece[][];
