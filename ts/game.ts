@@ -33,10 +33,6 @@ class Game {
         this.renderPGN();
         this.renderFEN();
     }
-    playSAN(san: string): void {
-        const move: Move = [[Letter[san[0]], Number(san[1]) - 1], [Letter[san[2]], Number(san[3]) - 1]];
-        this.play(move);
-    }
     playBestMove(depth: number): void {
         let bestMove: Move;
         if (this.node.lastX() === 13 || this.node.lastO() === 3) {
