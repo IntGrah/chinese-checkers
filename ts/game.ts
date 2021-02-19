@@ -45,7 +45,7 @@ class Game {
     }
     importFEN(fen: string = C.STARTING_POSITION): void {
         const board: Board = [],
-            result: RegExpMatchArray = fen.match(/(.*) (x|o)/),
+            result: RegExpMatchArray = fen.match(/(.*) ([xo])/),
             split: string[] = result[1].split("/"),
             turn: boolean = result[2] === "x";
         let y: number = 0;
@@ -84,7 +84,7 @@ class Game {
             }
             fen += "/";
         }
-        return (fen + " " + this.node.turn).replace(/1/g, "x").replace(/2/g, "o").replace(/0{1,9}/g, match => match.length.toString());
+        return (fen + " " + this.node.turn ? "x" : "o").replace(/1/g, "x").replace(/2/g, "o").replace(/0{1,9}/g, match => match.length.toString());
     }
     exportPGN(): string {
         let pgn: string = `[Event "${this.meta.event}"]\n[Site "${this.meta.site}"]
